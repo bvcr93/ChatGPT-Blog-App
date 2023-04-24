@@ -1,9 +1,10 @@
+'use client'
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import Ad1 from "../../public/assets/ad-1.jpeg";
 import SocialLinks from "./SocialLinks";
-
+import { motion } from 'framer-motion'
 
 
 const Navbar = () => {
@@ -25,15 +26,25 @@ const Navbar = () => {
       </div>
     </div>
   </nav>
-        <div className="flex justify-between gap-8 mt-5 mb-4 maincol">
-          <div className="basis-2/3 md:mt-3">
+        <div
+       
+        className="flex justify-between gap-8 mt-5 mb-4 maincol">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ rotate: 360, scale: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 260,
+              damping: 20
+            }}
+           className="basis-2/3 md:mt-3">
             <h1 className="font-bold text-3xl md:text-5xl">
               BLOG OF THE FUTURE
             </h1>
             <p className="text-sm mt-3">
               Blog dedicated towards AI generation and job automation
             </p>
-          </div>
+          </motion.div>
           <div className="basis-full relative w-auto h-32 bg-wh-500">
             <Image
               fill
