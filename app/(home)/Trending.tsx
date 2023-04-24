@@ -28,11 +28,16 @@ export default function Trending() {
         </div>
       </div> */}
       <div className="sm:grid grid-cols-4 gap-5 grid-rows-2 sm:h-[600px] my-3">
-        <TrendingCard className=" col-span-2 row-span-2  bg-wh-10"></TrendingCard>
-        <TrendingCard className=" col-span-2 row-span-1  bg-wh-10"></TrendingCard>
-        <TrendingCard className=" col-span-1 row-span-1  bg-wh-10"></TrendingCard>
-        <TrendingCard className=" col-span-1 row-span-1  bg-wh-10"></TrendingCard>
+        <TrendingCard className=" col-span-2 row-span-2 border" />
+        <TrendingCard className=" col-span-2 row-span-1 border" />
+        <TrendingCard className=" col-span-1 row-span-1 border" />
+        <TrendingCard className=" col-span-1 row-span-1 border" />
       </div>
+      <p className="text-sm">
+        Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Doloribus, perferendis! dolor sit amet consectetur, adipisicing elit.
+        Dolores, sint.
+      </p>
     </section>
   );
 }
