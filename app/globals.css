@@ -10,3 +10,7 @@ body,
   width: 100%;
   @apply text-sm;
 }
+
+.maincol {
+  @apply max-w-screen-md mx-auto px-10;
+}
