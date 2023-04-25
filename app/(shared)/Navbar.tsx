@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import Ad1 from "../../public/assets/ad-1.jpeg";
+import Ad1 from "../../public/assets/ad-1.jpg";
 import SocialLinks from "./SocialLinks";
 import { motion } from 'framer-motion'
 

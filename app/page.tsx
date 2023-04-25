@@ -9,12 +9,25 @@ import Sidebar from "./(shared)/Sidebar";
 import { prisma } from "./api/hello/client";
 import { Post } from "@prisma/client";
 
-export const revalidate = 60
+export const revalidate = 60;
 
 const getPosts = async () => {
-  const posts: Post[] = await prisma.post.findMany();
-  return posts;
+  const posts = await prisma.post.findMany();
+
+  const formattedPosts = await Promise.all(
+    posts.map(async (post: Post) => {
+      const imageModule = require(`../public${post.image}`);
+      return {
+        ...post,
+        image: imageModule.default,
+      };
+    })
+  );
+
+  return formattedPosts;
 };
+
+
 
 export default async function Home() {
   const posts = await getPosts();
@@ -52,8 +65,8 @@ export default async function Home() {
       <Trending trendingPosts={trendingPosts} />
       <div className="md:flex gap-10 mb-5">
         <div className="basis-3/4">
-          <Tech techPosts={techPosts}/>
-          <Travel travelPosts = {travelPosts}/>
+          <Tech techPosts={techPosts} />
+          <Travel travelPosts={travelPosts} />
           <Other otherPosts={otherPosts} />
           <div className="hidden md:block ">
             <Subscribe />

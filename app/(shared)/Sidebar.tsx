@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import SocialLinks from "./SocialLinks";
 import Subscribe from "./Subscribe";
-import ad1 from "../../public/assets/ad-1.jpeg";
+import ad1 from "../../public/assets/ad-1.jpg"
 
 type Props = {};
 
@@ -21,7 +21,9 @@ const Sidebar = (props: Props) => {
         About the Blog
       </h4>
       <div className="flex justify-center my-3">
-        <Image src={ad1} width={1000} height={1000} alt="" />
+        <Image  sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw" src={ad1} width={1000} height={1000} alt="" />
       </div>
       <h4 className="py-3 px-5 text-wh-500 font-bold text-center">
         Geoffrey Epstein
