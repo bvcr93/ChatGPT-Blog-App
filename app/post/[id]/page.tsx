@@ -30,6 +30,10 @@ export default async function PostDetails({ params }: PostDetailsProps) {
 
   const post: FormattedPost | null = await getPost(id);
   console.log(post);
+
+  if(!post){
+    return <div>Post not found</div>
+  }
   return (
     <main className="px-10 leading-7 maincol">
       <div className="md:flex gap-10 mb-5">

@@ -5,6 +5,9 @@ import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Image from "next/image";
 import SocialLinks from "@/app/(shared)/SocialLinks";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { EditorMenuBar } from "./EditorMenuBar";
 
 interface ContentProps {
   post: FormattedPost | null;
@@ -17,6 +20,16 @@ export default function Content({ post }: ContentProps) {
   const [content, setContent] = useState(post?.content);
   const [contentError, setContentError] = useState("");
   const [tempContent, setTempContent] = useState(content);
+
+  const handleIsEditable = (bool: boolean) => {
+    setIsEditable(bool);
+    editor?.setEditable(bool);
+  };
+
+  const editor = useEditor({
+    extensions: [StarterKit],
+    content: "<p>Hello World! 🌎️</p>",
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,8 +63,7 @@ export default function Content({ post }: ContentProps) {
             <div className="flex justify-between gap-3">
               <button
                 onClick={() => {
-                  setIsEditable(false);
-                  setContent(tempContent);
+                  handleIsEditable(!isEditable);
                 }}
               >
                 <AiOutlineClose className="text-2xl text-accent-red" />
@@ -60,8 +72,7 @@ export default function Content({ post }: ContentProps) {
           ) : (
             <button
               onClick={() => {
-                setIsEditable(true);
-                setTempContent(content);
+                handleIsEditable(!isEditable);
               }}
             >
               <AiFillEdit className="text-2xl text-accent-red " />
@@ -79,6 +90,7 @@ export default function Content({ post }: ContentProps) {
                 onChange={() => console.log("change title")}
                 placeholder="title"
                 className="border-2 rounded-md bg-wh-50 p-3 w-full"
+                value={title}
               ></textarea>
             </div>
           ) : (
@@ -104,6 +116,22 @@ export default function Content({ post }: ContentProps) {
             className="object-cover"
           />
         </div>
+        <div
+          className={
+            isEditable
+              ? "border-2 rounded-md bg-wh-50 p-3"
+              : "w-full max-w-full"
+          }
+        >
+          {isEditable && (
+            <>
+              <EditorMenuBar editor={editor} />
+              <hr className="border-1 mt-2" />
+              <EditorContent editor={editor} />
+            </>
+          )}
+        </div>
+
         {/* SUBMIT BUTTON */}
         {isEditable && (
           <div className="flex justify-end">
