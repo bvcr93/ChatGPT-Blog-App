@@ -1,13 +1,15 @@
 "use client";
-import { AiFillEdit } from "react-icons/ai";
+
 import { FormattedPost } from "@/app/types";
 import React, { useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import Image from "next/image";
 import SocialLinks from "@/app/(shared)/SocialLinks";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { EditorMenuBar } from "./EditorMenuBar";
+import { Editor } from "@tiptap/react";
+import CategoryAndEdit from "./CategoryAndEdit";
+
 
 interface ContentProps {
   post: FormattedPost | null;
@@ -19,21 +21,41 @@ export default function Content({ post }: ContentProps) {
   const [titleError, setTitleError] = useState("");
   const [content, setContent] = useState(post?.content);
   const [contentError, setContentError] = useState("");
+  const [tempTitle, setTempTitle] = useState(title);
   const [tempContent, setTempContent] = useState(content);
+  const [temporaryContent, setTemporaryContent] = useState(content);
 
   const handleIsEditable = (bool: boolean) => {
     setIsEditable(bool);
     editor?.setEditable(bool);
   };
-
+  const handleOnChangeContent = ({ editor }: any) => {
+    if (!(editor as Editor).isEmpty) setContentError("");
+    setContent((editor as Editor).getHTML());
+  };
   const editor = useEditor({
     extensions: [StarterKit],
-    content: "<p>Hello World! 🌎️</p>",
+    onUpdate: handleOnChangeContent,
+    editorProps: {
+      attributes: {
+        class:
+          "prose prose-sm xl:prose-xl leading-8 focus:outline-none w-full max-w-full",
+      },
+    },
+    content: content,
+    editable: isEditable,
   });
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
+
+  const handleOnChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (title) setTitleError("");
+    setTitle(e.target.value);
+  };
+
+
+
 
   function formatDate(dateString: string | undefined): string {
     if (!dateString) {
@@ -54,32 +76,18 @@ export default function Content({ post }: ContentProps) {
       <h5 className="text-wh-300 ">{`Home > ${post?.category} > ${post?.title}`}</h5>
 
       {/* CATEGORY AND EDIT */}
-      <div className="flex justify-between items-center">
-        <h4 className="bg-accent-orange py-2 px-5 text-wh-900 text-sm font-bold">
-          {post?.category}
-        </h4>
-        <div className="mt-4">
-          {isEditable ? (
-            <div className="flex justify-between gap-3">
-              <button
-                onClick={() => {
-                  handleIsEditable(!isEditable);
-                }}
-              >
-                <AiOutlineClose className="text-2xl text-accent-red" />
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => {
-                handleIsEditable(!isEditable);
-              }}
-            >
-              <AiFillEdit className="text-2xl text-accent-red " />
-            </button>
-          )}
-        </div>
-      </div>
+      <CategoryAndEdit 
+       isEditable={isEditable}
+       handleIsEditable={handleIsEditable}
+       title={title}
+       setTitle={setTitle}
+       tempTitle={tempTitle}
+       setTempTitle={setTempTitle}
+       tempContent={tempContent}
+       setTempContent={setTempContent}
+       editor={editor}
+       post={post}
+      />
       <form onSubmit={handleSubmit}>
         {/* HEADER */}
 
@@ -87,7 +95,7 @@ export default function Content({ post }: ContentProps) {
           {isEditable ? (
             <div>
               <textarea
-                onChange={() => console.log("change title")}
+                onChange={handleOnChangeTitle}
                 placeholder="title"
                 className="border-2 rounded-md bg-wh-50 p-3 w-full"
                 value={title}
