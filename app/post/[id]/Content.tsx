@@ -9,6 +9,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { EditorMenuBar } from "./EditorMenuBar";
 import { Editor } from "@tiptap/react";
 import CategoryAndEdit from "./CategoryAndEdit";
+import Article from "./Article";
 
 
 interface ContentProps {
@@ -45,9 +46,40 @@ export default function Content({ post }: ContentProps) {
     content: content,
     editable: isEditable,
   });
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  
+  
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // validation checks
+    if (title === "") setTitleError("This field is required.");
+    if (editor?.isEmpty) setContentError("This field is required.");
+    if (title === "" || editor?.isEmpty) return;
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/post/${post?.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title,
+          content: content,
+        }),
+      }
+    );
+    const data = await response.json();
+
+    handleIsEditable(false);
+    setTempTitle("");
+    setTempContent("");
+
+    setTitle(data.title);
+    setContent(data.content);
+    editor?.commands.setContent(data.content);
   };
+
 
   const handleOnChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (title) setTitleError("");
@@ -124,21 +156,13 @@ export default function Content({ post }: ContentProps) {
             className="object-cover"
           />
         </div>
-        <div
-          className={
-            isEditable
-              ? "border-2 rounded-md bg-wh-50 p-3"
-              : "w-full max-w-full"
-          }
-        >
-          {isEditable && (
-            <>
-              <EditorMenuBar editor={editor} />
-              <hr className="border-1 mt-2" />
-              <EditorContent editor={editor} />
-            </>
-          )}
-        </div>
+      <Article
+       editor={editor} 
+       isEditable = {isEditable} 
+       contentError={contentError}
+       setContent = {setContent}
+       title = {title}
+       />
 
         {/* SUBMIT BUTTON */}
         {isEditable && (
