@@ -2,7 +2,8 @@ import Image from "next/image";
 import React from "react";
 import SocialLinks from "./SocialLinks";
 import Subscribe from "./Subscribe";
-import ad1 from "../../public/assets/ad-1.jpg"
+import Ad2 from "/public/assets/ad-2.png";
+import AboutProfile from "/public/assets/about-profile.jpg";
 
 type Props = {};
 
@@ -16,14 +17,24 @@ const Sidebar = (props: Props) => {
         <SocialLinks isDark />
       </div>
       <Subscribe />
-
+      <Image
+        className="hidden md:block my-8 w-full"
+        alt="advert-2"
+        placeholder="blur"
+        src={Ad2}
+        width={500}
+        height={1000}
+      />
       <h4 className="bg-wh-900 py-3 px-5 text-wh-50 text-xs font-bold text-center">
         About the Blog
       </h4>
       <div className="flex justify-center my-3">
-        <Image  sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw" src={ad1} width={1000} height={1000} alt="" />
+        <Image
+          alt="about-profile"
+          placeholder="blur"
+          src={AboutProfile}
+          style={{ width: "500px", height: "250px", objectFit: "cover" }}
+        />
       </div>
       <h4 className="py-3 px-5 text-wh-500 font-bold text-center">
         Geoffrey Epstein
