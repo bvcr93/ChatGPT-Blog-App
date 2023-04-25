@@ -8,7 +8,8 @@ import Subscribe from "./(shared)/Subscribe";
 import Sidebar from "./(shared)/Sidebar";
 import { prisma } from "./api/hello/client";
 import { Post } from "@prisma/client";
-const inter = Inter({ subsets: ["latin"] });
+
+export const revalidate = 60
 
 const getPosts = async () => {
   const posts: Post[] = await prisma.post.findMany();
@@ -39,20 +40,19 @@ export default async function Home() {
         post?.category === "Food"
       ) {
         otherPosts.push(post);
-      } 
-     
+      }
     });
     return [trendingPosts, techPosts, travelPosts, otherPosts];
   };
 
-  const [ trendingPosts, techPosts, travelPosts, otherPosts ] = formatPosts();
+  const [trendingPosts, techPosts, travelPosts, otherPosts] = formatPosts();
 
   return (
     <main className="px-10 leading-7 maincol">
-      <Trending trendingPosts= {trendingPosts}/>
+      <Trending trendingPosts={trendingPosts} />
       <div className="md:flex gap-10 mb-5">
         <div className="basis-3/4">
-          <Tech />
+          <Tech techPosts={techPosts}/>
           <Travel />
           <Other />
           <div className="hidden md:block ">

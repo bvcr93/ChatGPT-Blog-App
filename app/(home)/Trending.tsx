@@ -67,7 +67,7 @@ const TrendingCard = ({ className,post }: TrendingCardProps) => {
         <h4 className="inline-block px-5 py-1 font-semibold bg-accent-orange text-wh-900">
          {post.category}
         </h4>
-        <div className="text-wh-100 mt-2">dfg</div>
+        <div className="text-wh-100 mt-2">{post.title}</div>
       </div>
     </Link>
   );
