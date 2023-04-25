@@ -33,7 +33,7 @@ const Sidebar = (props: Props) => {
           alt="about-profile"
           placeholder="blur"
           src={AboutProfile}
-          style={{ width: "500px", height: "250px", objectFit: "cover" }}
+          style={{ width: "500px", height: "350px", objectFit: "cover" }}
         />
       </div>
       <h4 className="py-3 px-5 text-wh-500 font-bold text-center">
@@ -43,6 +43,27 @@ const Sidebar = (props: Props) => {
         Sit diam vel lacus tortor molestie amet tincidunt. Amet amet arcu sed
         facilisi
       </p>
+      <p className="mt-10 italic py-5">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime est
+        voluptas error sed, fugiat ducimus ullam, dignissimos eum itaque
+        deserunt nemo, eveniet quisquam accusantium illo reprehenderit harum
+        fuga? Repellendus enim reprehenderit nam debitis deleniti, temporibus
+        iste in dolorum fuga. Vel animi, vitae fuga officia officiis nisi beatae
+        debitis similique maiores soluta at laudantium voluptas quam dolore
+        praesentium velit dolores ut deserunt? Velit sapiente fugit rerum animi
+        dolor officia, dolore incidunt nostrum porro ratione magni quam
+        consequuntur consectetur. Et quam quod, ad animi adipisci veniam modi
+      </p>
+      <div className="h-[500px] bg-wh-50 w-full border relative">
+        <div className="absolute bottom-[25%] p-4 text-lg">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates
+          unde minima quis repellendus soluta illo natus ut magnam, eveniet eius
+          at possimus ratione voluptatem nostrum amet rem odit quam. Sequi
+          perspiciatis esse itaque incidunt minima voluptas quia soluta
+          obcaecati repellat quibusdam aspernatur dolorum doloremque, nostrum
+          dolore fugit nulla laboriosam magnam!
+        </div>
+      </div>
     </section>
   );
 };
