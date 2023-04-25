@@ -22,26 +22,26 @@ export default function Tech({ techPosts }: TechProps) {
         {/* LARGE CARD */}
         <Card
           post={techPosts[0]}
-          className="col-span-1 border row-span-3 "
+          className="col-span-1 row-span-3 "
           imageHeight="h-96"
           isLongForm
         />
         {/* SMALL CARDS */}
         <Card
           post={techPosts[1]}
-          className="col-span-1 border row-span-1 mt-10 sm:mt-0 flex justify-between gap-3"
+          className="col-span-1 row-span-1 mt-10 sm:mt-0 flex justify-between gap-3"
           imageHeight="h-48"
           isSmallCard
         />
         <Card
           post={techPosts[2]}
-          className="col-span-1 border row-span-1 mt-10 sm:mt-0 flex justify-between gap-3"
+          className="col-span-1 row-span-1 mt-10 sm:mt-0 flex justify-between gap-3"
           imageHeight="h-48"
           isSmallCard
         />
         <Card
           post={techPosts[3]}
-          className="col-span-1 border row-span-1 mt-10 sm:mt-0 flex justify-between gap-3"
+          className="col-span-1 row-span-1 mt-10 sm:mt-0 flex justify-between gap-3"
           imageHeight="h-48"
           isSmallCard
         />
