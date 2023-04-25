@@ -11,7 +11,6 @@ import { Editor } from "@tiptap/react";
 import CategoryAndEdit from "./CategoryAndEdit";
 import Article from "./Article";
 
-
 interface ContentProps {
   post: FormattedPost | null;
 }
@@ -46,8 +45,7 @@ export default function Content({ post }: ContentProps) {
     content: content,
     editable: isEditable,
   });
-  
-  
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -80,14 +78,10 @@ export default function Content({ post }: ContentProps) {
     editor?.commands.setContent(data.content);
   };
 
-
   const handleOnChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (title) setTitleError("");
     setTitle(e.target.value);
   };
-
-
-
 
   function formatDate(dateString: string | undefined): string {
     if (!dateString) {
@@ -108,17 +102,17 @@ export default function Content({ post }: ContentProps) {
       <h5 className="text-wh-300 ">{`Home > ${post?.category} > ${post?.title}`}</h5>
 
       {/* CATEGORY AND EDIT */}
-      <CategoryAndEdit 
-       isEditable={isEditable}
-       handleIsEditable={handleIsEditable}
-       title={title}
-       setTitle={setTitle}
-       tempTitle={tempTitle}
-       setTempTitle={setTempTitle}
-       tempContent={tempContent}
-       setTempContent={setTempContent}
-       editor={editor}
-       post={post}
+      <CategoryAndEdit
+        isEditable={isEditable}
+        handleIsEditable={handleIsEditable}
+        title={title}
+        setTitle={setTitle}
+        tempTitle={tempTitle}
+        setTempTitle={setTempTitle}
+        tempContent={tempContent}
+        setTempContent={setTempContent}
+        editor={editor}
+        post={post}
       />
       <form onSubmit={handleSubmit}>
         {/* HEADER */}
@@ -132,6 +126,7 @@ export default function Content({ post }: ContentProps) {
                 className="border-2 rounded-md bg-wh-50 p-3 w-full"
                 value={title}
               ></textarea>
+              {titleError && <p className="mt-1 ">{titleError}</p>}
             </div>
           ) : (
             <h3 className="font-bold text-3xl mt-3">{title}</h3>
@@ -156,13 +151,13 @@ export default function Content({ post }: ContentProps) {
             className="object-cover"
           />
         </div>
-      <Article
-       editor={editor} 
-       isEditable = {isEditable} 
-       contentError={contentError}
-       setContent = {setContent}
-       title = {title}
-       />
+        <Article
+          editor={editor}
+          isEditable={isEditable}
+          contentError={contentError}
+          setContent={setContent}
+          title={title}
+        />
 
         {/* SUBMIT BUTTON */}
         {isEditable && (
