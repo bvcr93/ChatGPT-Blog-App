@@ -17,8 +17,8 @@ model Post {
   updatedAt DateTime @updatedAt
   title     String
   category  String
+  content   String   
   author    String
   image     String
-  authorId  String?
-  snippet    String
+  snippet   String   
 }

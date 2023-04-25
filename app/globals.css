@@ -12,5 +12,5 @@ body,
 }
 
 .maincol {
-  @apply max-w-screen-md mx-auto px-10;
+  @apply max-w-screen-xl mx-auto px-10;
 }
