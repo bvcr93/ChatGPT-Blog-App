@@ -9,7 +9,7 @@ interface PostDetailsProps {
     id: string;
   };
 }
-
+export const revalidate = 60;
 const getPost = async (id: string) => {
   const post: PostType | null = await prisma.post.findUnique({ where: { id } });
   if (!post) {
@@ -29,15 +29,12 @@ export default async function PostDetails({ params }: PostDetailsProps) {
   const { id } = params;
 
   const post: FormattedPost | null = await getPost(id);
-  console.log(post)
+  console.log(post);
   return (
     <main className="px-10 leading-7 maincol">
       <div className="md:flex gap-10 mb-5">
         <div className="basis-3/4">
-          <div className="hidden md:block ">
-            <Content />
-           id: {id}
-          </div>
+          <Content post={post} />
         </div>
         <div className="basis-1/4">
           <Sidebar />
