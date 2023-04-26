@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "prisma generate && next build"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.17",
@@ -22,6 +23,7 @@
     "@types/react": "18.0.38",
     "@types/react-dom": "18.0.11",
     "autoprefixer": "10.4.14",
+    "debug": "^4.3.4",
     "framer-motion": "^10.12.4",
     "next": "13.3.1",
     "openai": "^3.2.1",
